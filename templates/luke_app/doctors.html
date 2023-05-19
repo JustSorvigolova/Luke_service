@@ -1,0 +1,101 @@
+{% extends 'luke_app/index.html' %}
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="ru">
+
+  <body>
+    {% block header %}
+
+        <nav class="navbar py-4 navbar-expand-lg ftco_navbar navbar-light bg-light flex-row">
+    	<div class="container">
+    		<div class="row no-gutters d-flex align-items-start align-items-center px-3 px-md-0">
+    			<div class="col-lg-1 col-5 col-md-2 col-sm-2 pr-4 align-items-center ">
+		    		<a class="navbar-brand" href="{% url 'doctor_list_home' %}"><img class="img-fluid" src="{% static 'images/Logo.png' %}"></a>
+	    		</div>
+	    		<div class="col-lg-10 d-none d-md-block">
+		    		<div class="row d-flex">
+			    		<div class="col-md-4 pr-4 d-flex topper align-items-center">
+			    			<div class="icon bg-white mr-2 d-flex justify-content-center align-items-center"><span class="icon-map"></span></div>
+						    <span class="text">ул.Победы 84,Токмок, Чуйский район, Чуйская область</span>
+					    </div>
+					    <div class="col-md pr-4 d-flex topper align-items-center">
+					    	<div class="icon bg-white mr-2 d-flex justify-content-center align-items-center"><span class="icon-paper-plane"></span></div>
+						    <span class="text">Email: youremail@email.com</span>
+					    </div>
+					    <div class="col-md pr-4 d-flex topper align-items-center">
+					    	<div class="icon bg-white mr-2 d-flex justify-content-center align-items-center"><span class="icon-phone2"></span></div>
+						    <span class="text">Телефон: +996 553‒70‒57‒65</span>
+					    </div>
+				    </div>
+			    </div>
+		    </div>
+		  </div>
+    </nav>
+	  <nav class="navbar navbar-expand-lg navbar-dark bg-dark ftco-navbar-light" id="ftco-navbar">
+	    <div class="container d-flex align-items-center">
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+	        <span class="oi oi-menu"></span> Меню
+	      </button>
+	      <p class="button-custom order-lg-last mb-0"><a href="https://api.whatsapp.com/send/?phone=%2B996553705765&text&type=phone_number&app_absent=0" class="btn btn-secondary py-2 px-3">WhatsApp</a></p>
+	      <div class="collapse navbar-collapse" id="ftco-nav">
+	        <ul class="navbar-nav mr-auto">
+	        	<li class="nav-item "><a href="{% url 'doctor_list_home' %}" class="nav-link pl-0">Главная</a></li>
+	        	<li class="nav-item active"><a href="{% url 'doctor_list' %}" class="nav-link">Врачи</a></li>
+	        	<li class="nav-item"><a href="{% url 'service' %}" class="nav-link">Услуги</a></li>
+	        	<li class="nav-item"><a href="{% url 'news' %}" class="nav-link">Новости</a></li>
+	          <li class="nav-item"><a href="{% url 'contacts' %}" class="nav-link">Контакты</a></li>
+	        </ul>
+	      </div>
+	    </div>
+	  </nav>
+
+    {% endblock header %}
+
+{% block content %}
+    <section class="hero-wrap hero-wrap-2" style="background-image: url({% static 'images/bg_2.jpg' %});" data-stellar-background-ratio="0.5">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+          <div class="col-md-9 ftco-animate text-center">
+            <h1 class="mb-2 bread">Квалифицированные врачи</h1>
+            <p class="breadcrumbs"><span class="mr-2"><a href="{% url 'doctor_list_home' %}">Главная <i class="ion-ios-arrow-forward"></i></a></span> <span>Врачи <i class="ion-ios-arrow-forward"></i></span></p>
+          </div>
+        </div>
+      </div>
+    </section>
+		
+		<section class="ftco-section">
+			<div class="container">
+				<div class="row">
+                    {% for doctor in doctor_list %}
+                    <div class="col-md-6 col-lg-3 ftco-animate">
+						<div class="staff">
+							<div class="img-wrap d-flex align-items-stretch">
+								<div class="img align-self-stretch" style="background-image: url({{ doctor.photo.url }});"></div>
+							</div>
+							<div class="text pt-3 text-center">
+								<h3>{{ doctor.Second_Name }}  {{ doctor.First_Name }}</h3>
+								<span class="position mb-2">{{ doctor.specialty }}</span>
+								<div class="faded">
+									<p>{{ doctor.bio }}</p>
+									<ul class="ftco-social text-center">
+		                <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
+		                <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
+		                <li class="ftco-animate"><a href="#"><span class="icon-google-plus"></span></a></li>
+		                <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+		              </ul>
+	              </div>
+							</div>
+						</div>
+					</div>
+
+
+            {% endfor %}
+				</div>
+
+			</div>
+		</section>
+    {% endblock content %}
+  </body>
+</html>
